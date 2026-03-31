@@ -322,6 +322,25 @@ main{flex:1;display:flex;flex-direction:column;align-items:center;justify-conten
         </label>
       </div>
 
+      <div>
+        <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:4px">✕後のクールダウン</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:12px;opacity:0.6">時間・問題数どちらか満たすまで再出題しない</div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+          <span style="font-size:12px;color:var(--muted);width:36px">時間</span>
+          <input type="range" id="cd-hours-slider" min="0" max="24" step="0.5" value="1"
+            style="flex:1;accent-color:var(--gold);height:4px;cursor:pointer"
+            oninput="setCooldownHours(this.value)">
+          <span style="font-size:12px;color:var(--muted);width:40px;text-align:right" id="cd-hours-label">1時間</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:12px;color:var(--muted);width:36px">問題数</span>
+          <input type="range" id="cd-count-slider" min="0" max="200" step="25" value="50"
+            style="flex:1;accent-color:var(--gold);height:4px;cursor:pointer"
+            oninput="setCooldownCount(this.value)">
+          <span style="font-size:12px;color:var(--muted);width:40px;text-align:right" id="cd-count-label">50問</span>
+        </div>
+      </div>
+
       <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:22px">
         <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:12px">データ</div>
         <div style="display:flex;flex-direction:column;gap:8px">
@@ -340,10 +359,10 @@ const POINT = {
 // BASIC
 "take advantage of":{tip:"advantage は可算名詞。「うまく利用する」の積極的ニュアンス",similar:"make use of / utilize / avail oneself of",caution:"× take advantage for は誤り。前置詞は必ず of"},
 "make use of":{tip:"make good use of（うまく活用）/ make full use of（十分に活用）の形が頻出",similar:"take advantage of / utilize / employ / draw on",caution:"use は名詞。× make use from は誤り"},
-"in spite of":{tip:"後ろは名詞・動名詞のみ。despite と書き換え可能な超頻出問題",similar:"despite / notwithstanding / regardless of",caution:"× in spite of that は不可 → although / though に換える"},
-"thanks to":{tip:"肯定的な原因に使うのが基本。皮肉で否定的文脈にも使える",similar:"owing to / due to / because of / on account of",caution:"due to は形式ばった書き言葉向き。thanks to は口語でも自然"},
+"in spite of":{tip:"後ろは名詞・動名詞のみ。despite と書き換え可能な超頻出問題",similar:"despite / notwithstanding / regardless of",caution:"× in spite of + SV節（that節）は不可。in spite of の後は名詞・動名詞のみ → although / though に換える"},
+"thanks to":{tip:"肯定的な原因に使うのが基本。皮肉で否定的文脈にも使える",similar:"owing to / due to / because of / on account of",caution:"thanks to は肯定・否定どちらの文脈でも使えるが、肯定文で使うのが基本。否定文では owing to や due to の方が自然"},
 "due to":{tip:"due to（前置詞句）と be due to（〜するはずだ）の区別は必須",similar:"owing to / because of / on account of / as a result of",caution:"文頭での due to を厳格な文語では避ける場合があるが入試では許容"},
-"because of":{tip:"because は接続詞（SV）、because of は前置詞句（名詞）の区別が超頻出",similar:"due to / owing to / on account of",caution:"× because of that は不可 → because（接続詞）に換える"},
+"because of":{tip:"because は接続詞（SV）、because of は前置詞句（名詞）の区別が超頻出",similar:"due to / owing to / on account of",caution:"× because of + SV節（that節）は不可。because of の後は名詞・動名詞のみ → because に換える"},
 "as a result of":{tip:"as a result（単独）で「その結果」。of + 名詞で原因を明示",similar:"owing to / due to / in consequence of / as a consequence of",caution:"result in（原因→結果）/ result from（結果←原因）との区別も必須"},
 "according to":{tip:"出典・情報源を示す。自分の意見には絶対使えない",similar:"based on / in line with / as stated in",caution:"× according to me / my opinion は誤り。in my opinion を使う"},
 "instead of":{tip:"instead of -ing（〜する代わりに）の形で頻出",similar:"in place of / in lieu of / rather than",caution:"後ろは名詞・動名詞（× instead of + 原形）"},
@@ -378,7 +397,7 @@ const POINT = {
 "consist of":{tip:"「〜から成り立つ」（状態動詞）。進行形・受動態にしない",similar:"be composed of / be made up of / comprise",caution:"× be consisted of は誤り。consist of に受動態はない"},
 "be aware of":{tip:"「〜に気づいている（状態）」。become aware of（変化）との区別",similar:"be conscious of / realize / know / recognize",caution:"be aware that SV（〜ということを知っている）の that 節形も頻出"},
 "far from":{tip:"far from + 名詞/形容詞/動名詞「〜どころか」。強い否定の強調",similar:"anything but / by no means / not at all",caution:"far from -ing（〜するどころか）は入試頻出"},
-"look up to":{tip:"「〜を尊敬する」。look down on（見下す）と対で覚える",similar:"respect / admire / think highly of / hold in high regard",caution:"look up to vs look down on を対で整理する"},
+"look up to":{tip:"「〜を尊敬する」。look down on（見下す）と対で覚える",similar:"respect / admire / think highly of / hold in high regard",caution:"× look up to someone as a hero（× up to の後に as は不要）→ look up to someone（尊敬する）が基本形"},
 "look down on":{tip:"「〜を見下す・軽蔑する」。look up to（尊敬する）と対",similar:"despise / condescend / belittle / have contempt for",caution:"look up to の対義語として一緒に整理する"},
 "put off":{tip:"「〜を延期する」「〜をいやがらせる」の2意味。postpone と書き換え可",similar:"postpone / delay / defer（延期）/ discourage / deter（いやがらせる）",caution:"put off -ing（〜することを延期する）の動名詞形が頻出"},
 "put on":{tip:"「〜を着る・身につける」「〜を上演する」「〜をだます」の多義語",similar:"wear（着用状態）/ perform / stage（上演）/ fool / deceive（だます）",caution:"put on（着る動作）vs wear（着ている状態）の区別は必須"},
@@ -431,7 +450,7 @@ const POINT = {
 "at least":{tip:"「少なくとも」。最低限の数量・条件を示す",similar:"no fewer than / a minimum of / if nothing else",caution:"at most（多くとも）との対比で覚える"},
 "at most":{tip:"「多くとも・せいぜい」。最大値・限界を示す",similar:"no more than / at best / a maximum of",caution:"at least（少なくとも）との対比で整理する"},
 "by chance":{tip:"「偶然に」。accidentally / by coincidence と書き換え可",similar:"accidentally / by accident / by coincidence / coincidentally",caution:"by chance vs on purpose（故意に）を対で覚える"},
-"on purpose":{tip:"「故意に・わざと」。deliberately / intentionally と書き換え可",similar:"deliberately / intentionally / on purpose / with intent",caution:"by accident（偶然）の反義語。副詞的に使う"},
+"on purpose":{tip:"「故意に・わざと」。deliberately / intentionally と書き換え可",similar:"deliberately / intentionally / by design / with intent",caution:"by accident（偶然）の反義語。副詞的に使う"},
 "in a hurry":{tip:"「急いで」。hurriedly と書き換え可",similar:"hurriedly / in haste / hastily / at speed",caution:"be in a hurry to do（〜しようと急いでいる）の形も頻出"},
 "on time":{tip:"「時間通りに（予定通り）」。in time（遅れずに間に合って）との区別が超頻出",similar:"punctually / as scheduled",caution:"on time（時間ぴったり）vs in time（ぎりぎり間に合って）は必須区別"},
 "in time":{tip:"「間に合って・遅れずに」。on time（時間通り）との区別が超頻出",similar:"in time for / not too late / with time to spare",caution:"on time（予定時刻通り）vs in time（遅くなる前に間に合って）"},
@@ -496,9 +515,9 @@ const POINT = {
 "may well":{tip:"①「〜するのも当然だ」②「おそらく〜だろう」の2意味",similar:"have good reason to / quite possibly / be likely to",caution:"might well も同義。文脈から2つの意味を判断する"},
 "what is more":{tip:"「さらに・おまけに」。what is worse（さらに悪いことに）もセット",similar:"moreover / furthermore / in addition / besides",caution:"what is more（追加肯定）/ what is worse（さらに悪く）を区別"},
 "by virtue of":{tip:"「〜のゆえに・〜によって」（根拠・能力・権限）",similar:"by reason of / owing to / on the strength of / because of",caution:"by virtue of one's position（地位によって）が典型例"},
-"in lieu of":{tip:"「〜の代わりに」。instead of よりフォーマル",similar:"instead of / in place of / as a substitute for / rather than",caution:"lieu はフランス語由来（lieu = place）。入試長文で登場する"},
+"in lieu of":{tip:"「〜の代わりに」。instead of よりフォーマル",similar:"instead of / in place of / as a substitute for / rather than",caution:"in lieu of = instead of。フォーマルな文書でよく使われる"},
 "on the grounds that":{tip:"「〜という理由で」（根拠・論拠）",similar:"because / on account of the fact that / on the basis that",caution:"grounds（根拠・理由）は複数形で使うのが基本"},
-"what is worse":{tip:"「さらに悪いことに」。追加の悪い情報を提示する",similar:"worse still / to make matters worse / to top it all",caution:"what is more（さらに良いことに）/ what is worse（さらに悪いことに）を対で覚える"},
+"what is worse":{tip:"「さらに悪いことに」。追加の悪い情報を提示する",similar:"worse still / to make matters worse / to top it all",caution:"what is more（さらに・おまけに）/ what is worse（さらに悪いことに）を対で覚える"},
 "in the long run":{tip:"「長い目で見ると・最終的には」",similar:"ultimately / over time / eventually / in the end",caution:"in the short run（短期的には）との対比で理解する"},
 "in the short run":{tip:"「短期的には」。in the long run（長期的には）との対比",similar:"in the short term / for the time being / for now",caution:"in the long run の対義語として一緒に覚える"},
 "make no difference":{tip:"「違いがない・関係ない」。It doesn't matter と書き換え可",similar:"not matter / be irrelevant / be of no importance",caution:"make a difference（違いをもたらす）との対比で覚える"},
@@ -528,7 +547,7 @@ const POINT = {
 "at any rate":{tip:"「とにかく・いずれにせよ」。anyway / in any case と書き換え可",similar:"anyway / in any case / in any event / regardless",caution:"at any rate は話題を変えたり要点をまとめる場面で使う"},
 "in any case":{tip:"「いずれにしても・とにかく」。anyway / at any rate と書き換え可",similar:"anyway / at any rate / in any event / regardless",caution:"in any case（いずれにしても）vs just in case（〜に備えて）"},
 "one after another":{tip:"「次々と」。one after the other / in succession と書き換え可",similar:"successively / in succession / one by one / in sequence",caution:"one after another（多くの中で次々）vs one after the other（2つが交互）"},
-"by and large":{tip:"「概して・全体的に見て」。on the whole と書き換え可",similar:"on the whole / generally / for the most part / in general",caution:"by and large は航海用語（帆走の状態）が起源の慣用句"},
+"by and large":{tip:"「概して・全体的に見て」。on the whole と書き換え可",similar:"on the whole / generally / for the most part / in general",caution:"by and large は文頭・文中どこでも使える副詞句。on the whole とほぼ同義"},
 "long for":{tip:"「〜を切望する・〜を渇望する」",similar:"yearn for / crave / desire / wish for / pine for",caution:"long for + 名詞 / long to do（〜したいと切望する）の2形式"},
 "differ from":{tip:"「〜と異なる」。be different from と書き換え可",similar:"be different from / vary from / contrast with / deviate from",caution:"differ from A in B（A とBの点で異なる）の形も重要"},
 "refer to":{tip:"「〜を参照する」「〜を指す」「〜に言及する」の多義語",similar:"consult（参照）/ indicate（指す）/ mention / allude to（言及）",caution:"refer to A as B（A を B と呼ぶ）の形も頻出"},
@@ -558,7 +577,7 @@ const POINT = {
 "keep track of":{tip:"「〜を把握し続ける・追跡する」",similar:"monitor / follow / stay up to date with / keep up with",caution:"keep track of vs lose track of（見失う）を対で覚える"},
 "in retrospect":{tip:"「振り返ってみると・今から考えると」",similar:"looking back / in hindsight / on reflection",caution:"後悔や再評価を述べる際に文頭に置いて使う"},
 "to no avail":{tip:"「効果なく・徒労に終わって」。in vain と書き換え可",similar:"in vain / without success / fruitlessly / unsuccessfully",caution:"avail は「効果・役立ち」という名詞。to no avail = in vain"},
-"by the same token":{tip:"「同様の理由で・同じ論理で言えば」",similar:"similarly / likewise / in the same way / for the same reason",caution:"論理的な推論の展開で使う接続表現"},
+"by the same token":{tip:"「同様の理由で・同じ論理で言えば」",similar:"similarly / likewise / in the same way / for the same reason",caution:"by the same token（同じ理由で）は前文の根拠を引き継いで結論を導く接続表現"},
 "come to terms with":{tip:"「〜を受け入れる・〜と折り合いをつける」",similar:"accept / reconcile oneself to / make peace with",caution:"come to terms with の後は名詞・動名詞"},
 "run the risk of":{tip:"「〜の危険を冒す・〜のリスクを負う」",similar:"risk -ing / take a risk / expose oneself to the risk of",caution:"run the risk of -ing（動名詞）または of + 名詞"},
 "in view of":{tip:"「〜を考慮して・〜に鑑みて」",similar:"in light of / considering / given / taking into account",caution:"in light of と書き換え可能。in view of the fact that の形も頻出"},
@@ -686,7 +705,7 @@ const POINT = {
 "in the course of":{tip:"「〜の過程で・〜の間に」",similar:"during / in the process of / while / throughout",caution:"in the course of time（時間が経つにつれて）/ in the course of one's research（研究の過程で）"},
 "by the time":{tip:"「〜までには・〜するころには」（完了・完了形を伴う）",similar:"when / before / once",caution:"By the time he arrived, we had finished.（彼が来たときには私たちは終えていた）→完了形が伴う"},
 "at the risk of":{tip:"「〜の危険を冒して」",similar:"at the expense of / despite the risk of / by risking",caution:"at the risk of one's life（命がけで）/ at the risk of repeating（繰り返しになるが）"},
-"on the assumption":{tip:"「〜という前提のもとで」",similar:"assuming / on the premise / under the presupposition",caution:"on the assumption that SV の that 節形が最頻出"},
+
 "be on the rise":{tip:"「増加している・上昇中である」",similar:"be increasing / be growing / be on the increase / be rising",caution:"be on the rise vs be on the decline（減少している）を対で覚える"},
 "be on the decline":{tip:"「減少している・衰退中である」",similar:"be decreasing / be falling / be on the decrease / be declining",caution:"be on the rise（増加）vs be on the decline（減少）の対比が入試長文で頻出"},
 "subscribe to":{tip:"「〜に同意する・〜を支持する」「〜を定期購読する」の2意味",similar:"agree with / support / endorse（同意）/ take out a subscription to（定期購読）",caution:"subscribe to a theory/view（理論・見解を支持する）の「同意」の意味が読解で頻出"},
@@ -700,7 +719,7 @@ const POINT = {
 "beyond one's reach":{tip:"「〜の手の届かないところに・〜には不可能で」",similar:"out of one's reach / impossible for / inaccessible to",caution:"within reach（手の届くところに）vs beyond reach（手が届かない）を対で覚える"},
 "in the light of":{tip:"「〜を考慮して・〜の観点から」。in light of と同義",similar:"in view of / considering / given / taking into account",caution:"in light of / in the light of はどちらも正しい。前者が米語、後者が英国式"},
 "to the best of one's knowledge":{tip:"「知る限りでは・自分の知識の及ぶ範囲では」",similar:"as far as one knows / to one's knowledge",caution:"To the best of my knowledge, this has never happened before.（知る限り）が典型"},
-"out of one's depth":{tip:"「手に負えない・能力を超えている」",similar:"in over one's head / beyond one's ability / out of one's league",caution:"feel out of one's depth（手に余ると感じる）が典型。水深が自分の背丈を超えることが語源"},
+"out of one's depth":{tip:"「手に負えない・能力を超えている」",similar:"in over one's head / beyond one's ability / out of one's league",caution:"be / feel out of one's depth（自分の能力を超えていると感じる）が典型パターン"},
 "play a role in":{tip:"「〜において役割を果たす」。contribute to と書き換え可",similar:"contribute to / have a part in / take part in / be involved in",caution:"play a key/crucial/vital role in（重要な役割を果たす）のパターンが頻出"},
 "go hand in hand":{tip:"「密接に関連している・連動している」（2つのものが）",similar:"be closely related / be interconnected / go together / correlate",caution:"Education and prosperity often go hand in hand.（密接に関連）が典型文"},
 "bear fruit":{tip:"「実を結ぶ・成果が出る」",similar:"pay off / yield results / prove successful / produce results",caution:"His efforts finally bore fruit.（努力がついに実を結んだ）が典型パターン"},
@@ -718,8 +737,8 @@ const POINT = {
 "be pleased with":{tip:"「〜に満足している・〜を喜んでいる」",similar:"be satisfied with / be happy with / be delighted with",caution:"be pleased with（結果・物事）vs be pleased to do（〜して嬉しい）の2形式"},
 "be disappointed with":{tip:"「〜に失望している」。be disappointed at/about も同義",similar:"be dissatisfied with / be let down by / be disillusioned with",caution:"be disappointed with/at/about（前置詞3種類）/ be disappointed to do の形も重要"},
 "be worried about":{tip:"「〜を心配している」。be concerned about と書き換え可",similar:"be concerned about / be anxious about / worry about",caution:"be worried about（心配している状態）vs worry about（心配する動作）"},
-"be tired of":{tip:"「〜に飽き飽きしている・うんざりしている」",similar:"be fed up with / be sick of / be bored with",caution:"be tired of（飽きた）vs be tired from（〜で疲れた）の前置詞の違い"},
-"be tired from":{tip:"「〜で疲れている」",similar:"be exhausted from / be worn out from / be fatigued by",caution:"be tired of（うんざり）vs be tired from（疲れ）の前置詞の違いを区別"},
+"be tired of":{tip:"「〜に飽き飽きしている・うんざりしている」",similar:"be fed up with / be sick of / be bored with",caution:"be tired of -ing（〜することにうんざり）の動名詞形も頻出。× be tired of to do は不可"},
+"be tired from":{tip:"「〜で疲れている」",similar:"be exhausted from / be worn out from / be fatigued by",caution:"be tired from + 名詞（原因）。I'm tired from the long trip.が典型パターン"},
 "be satisfied with":{tip:"「〜に満足している」。be content with と書き換え可",similar:"be content with / be pleased with / be happy with",caution:"be satisfied with（満足の状態）vs satisfy（動詞：満足させる）の違い"},
 "be afraid of":{tip:"「〜を恐れている」。be scared of と書き換え可",similar:"be scared of / be frightened of / dread / fear",caution:"be afraid of -ing（〜することを恐れる）/ be afraid to do（怖くて〜できない）の意味の違い"},
 "be full of":{tip:"「〜でいっぱいだ・〜に満ちている」",similar:"be filled with / be packed with / be crowded with",caution:"be full of + 名詞（× be full of doing）"},
@@ -727,7 +746,7 @@ const POINT = {
 "be ashamed of":{tip:"「〜を恥じている」",similar:"feel shame about / be embarrassed about",caution:"be ashamed of（恥じている状態）vs be ashamed to do（恥ずかしくて〜できない）"},
 "be made from":{tip:"「〜から作られている（化学変化で材料が見えない）」",similar:"be produced from / be derived from",caution:"be made of（材料が見える）vs be made from（材料が変化して見えない）の区別が超頻出"},
 "be known to":{tip:"「〜に知られている（人に）」",similar:"be familiar to / be recognized by",caution:"be known to（人に）vs be known for（特徴）vs be known as（名称）の前置詞3種の区別"},
-"be different from":{tip:"「〜と異なる」。differ from と書き換え可",similar:"differ from / vary from / be distinct from",caution:"× be different than（米語では許容されるが入試では from が安全）"},
+"be different from":{tip:"「〜と異なる」。differ from と書き換え可",similar:"differ from / vary from / be distinct from",caution:"△ be different than は米語では許容されるが入試では from を使うのが安全"},
 "be similar to":{tip:"「〜に似ている」。resemble と書き換え可",similar:"resemble / look like / be alike / be akin to",caution:"be similar to（前置詞 to）vs similar（形容詞単独）"},
 "agree with":{tip:"「〜に同意する」「〜に合う（食物・気候）」の2意味",similar:"consent to / concur with（同意）/ suit / agree with one's stomach（体に合う）",caution:"agree with（意見に同意・体に合う）/ agree to（計画・提案に同意）/ agree on（決める）の前置詞3種"},
 "agree to":{tip:"「〜に同意する・〜を承諾する」（計画・提案・条件）",similar:"accept / consent to / approve of",caution:"agree with（意見・人）vs agree to（提案・計画）/ agree on（決定事項）の前置詞の違い"},
@@ -759,7 +778,7 @@ const POINT = {
 "let down":{tip:"「〜を失望させる」。disappoint と書き換え可",similar:"disappoint / fail / disillusion",caution:"let someone down（人を失望させる）/ let down（降ろす）の多義性に注意"},
 "make sure":{tip:"「〜を確認する・必ず〜する」",similar:"confirm / ensure / check / see to it that",caution:"make sure that SV（〜ということを確認する）の形が最頻出"},
 "make sense of":{tip:"「〜を理解する・意味を把握する」",similar:"understand / grasp / figure out / comprehend",caution:"make sense（意味をなす）vs make sense of（〜を理解する）の違い"},
-"pass away":{tip:"「亡くなる」（die の婉曲表現）",similar:"die / pass on / depart this world",caution:"pass away は die の丁寧な言い方。入試長文でよく使われる婉曲表現"},
+"pass away":{tip:"「亡くなる」（die の婉曲表現）",similar:"die / pass on / depart this world",caution:"go / pass on / pass away の順にやや格式が上がる。die の直接的な言い方を避けるときに使う"},
 "point out":{tip:"「〜を指摘する」",similar:"indicate / draw attention to / highlight / note",caution:"point out that SV（〜ということを指摘する）の形が最頻出"},
 "put away":{tip:"「〜を片付ける・しまう」",similar:"store / tidy up / put in place",caution:"put away（片付ける）vs throw away（捨てる）vs put aside（確保・脇に置く）"},
 "put back":{tip:"「〜を元に戻す」「〜を延期する」の2意味",similar:"replace / restore（元に戻す）/ postpone / delay（延期）",caution:"put back（元に戻す）vs put off（延期）vs put up（宿泊させる）の違い"},
@@ -771,7 +790,7 @@ const POINT = {
 "take over":{tip:"「〜を引き継ぐ・乗っ取る」",similar:"take control of / assume control / succeed to",caution:"take over a business（ビジネスを引き継ぐ）/ take over from someone（〜から引き継ぐ）"},
 "throw away":{tip:"「〜を捨てる」。discard と書き換え可",similar:"discard / dispose of / get rid of",caution:"throw away（捨てる）vs throw out（追い出す・捨てる）/ throw up（吐く）の違い"},
 "try on":{tip:"「〜を試着する」",similar:"wear for a test / fit on",caution:"try on（試着）vs try out（試してみる）の違い"},
-"turn on":{tip:"「〜をつける・スイッチを入れる」",similar:"switch on / activate / start",caution:"turn on（つける）vs turn off（消す）を対で覚える。turn on（怒らせる）の意味もある"},
+"turn on":{tip:"「〜をつける・スイッチを入れる」",similar:"switch on / activate / start",caution:"turn on（スイッチを入れる）の他に turn on（〜を怒らせる・興奮させる）の意味に注意"},
 "turn off":{tip:"「〜を消す・スイッチを切る」「〜をうんざりさせる」の2意味",similar:"switch off / deactivate（消す）/ disgust / put off（うんざりさせる）",caution:"turn on（つける）vs turn off（消す）を対で覚える"},
 "turn up":{tip:"「現れる・姿を見せる」「〜を上げる（音量）」の2意味",similar:"show up / appear（現れる）/ increase / raise（上げる）",caution:"turn up（現れる）vs turn down（断る・下げる）vs turn out（結果になる）を区別"},
 "watch out":{tip:"「気をつける・注意する」",similar:"be careful / look out / pay attention / be cautious",caution:"Watch out!（気をつけて！）は口語的な警告表現"},
@@ -804,7 +823,7 @@ const POINT = {
 "in the future":{tip:"「将来は・今後は」",similar:"in the years to come / from now on / in the coming years",caution:"in the future（将来一般）vs in future（英国式：今後は）の違い"},
 "in future":{tip:"「今後は（英国式）・将来は」",similar:"from now on / henceforth / hereafter / in the future",caution:"in future（英国式：今後は）vs in the future（将来のある時点）の微妙な違い"},
 "in the past":{tip:"「過去には・かつては」",similar:"formerly / previously / once / in former times",caution:"in the past（過去全般）/ in the recent past（最近）の使い分け"},
-"so far so good":{tip:"「今のところ順調だ」",similar:"going well up to now / no problems yet",caution:"入試会話文・長文で「進捗を確認する」場面でよく使われる慣用表現"},
+"so far so good":{tip:"「今のところ順調だ」",similar:"going well up to now / no problems yet",caution:"so far so good は進捗確認の定型表現。so far（これまで）+ so good（順調）の構造"},
 "up to now":{tip:"「今までのところ・これまで」。so far と書き換え可",similar:"so far / until now / to date / thus far",caution:"up to now と so far は書き換え可。現在完了形と一緒に使うことが多い"},
 "from now on":{tip:"「今後は・これからは」",similar:"henceforth / hereafter / in future / starting now",caution:"from now on は話し言葉でも書き言葉でも使える汎用性の高い表現"},
 "sooner or later":{tip:"「遅かれ早かれ」",similar:"eventually / in due course / before long / one day",caution:"Sooner or later, the truth will come out.（遅かれ早かれ真実は明らかになる）が典型"},
@@ -838,7 +857,7 @@ const POINT = {
 "be accustomed to -ing":{tip:"「〜に慣れている」。be used to -ing と書き換え可",similar:"be used to -ing / get used to -ing / be in the habit of",caution:"to は前置詞（× be accustomed to + 原形）。be used to -ing との書き換えが頻出"},
 "be opposed to":{tip:"「〜に反対している」",similar:"be against / object to / be hostile to",caution:"be opposed to -ing か名詞（× be opposed to + 原形）。to は前置詞"},
 "be exposed to":{tip:"「〜にさらされている」",similar:"come into contact with / be subject to / be open to",caution:"be exposed to danger/radiation/criticism のパターンで頻出。expose A to B（他動詞）との関係も整理"},
-"be accounted for":{tip:"「〜が説明される・〜が占められる」（account for の受動態）",similar:"be explained / be represented",caution:"account for は通常受動態にしないが、The increase can be accounted for by...のように使う場合もある"},
+"be accounted for":{tip:"「〜が説明される・〜が占められる」（account for の受動態）",similar:"be explained / be represented",caution:"be accounted for は正式に使われる受動態。All passengers have been accounted for.（全乗客の安否が確認された）が典型"},
 "be attributed to":{tip:"「〜に帰せられる・〜が原因とされる」（attribute A to B の受動態）",similar:"be ascribed to / be put down to / result from / be due to",caution:"The success was attributed to teamwork.（チームワークに帰せられた）が典型受動態形"},
 "be associated with":{tip:"「〜と関連している」（associate A with B の受動態）",similar:"be connected with / be linked to / be related to",caution:"be associated with（受動態・状態）vs associate A with B（能動態・動作）を区別"},
 "bring up":{tip:"「〜を育てる」「〜を持ち出す（話題）」「〜を吐く」の多義語",similar:"raise / rear（育てる）/ mention / raise（話題）/ vomit（吐く）",caution:"be brought up（育てられた）の受動態形が頻出。bring up a topic（話題を持ち出す）も重要"},
@@ -1006,7 +1025,7 @@ const POINT = {
 "no fewer than":{tip:"「〜もの（数えられるものに）」",similar:"as many as / at least / a full",caution:"no fewer than（可算名詞）vs no less than（不可算名詞）の使い分け"},
 "as many as":{tip:"「〜もの多くの（可算）」",similar:"no fewer than / a full / up to",caution:"as many as 1,000 people（1000人もの人）のように多さを強調。as few as（たったの〜）との対比"},
 "as much as":{tip:"「〜もの（不可算）・〜と同じくらい」",similar:"no less than（不可算）/ up to / as little as の逆",caution:"as much as（不可算：量の多さ強調）vs as many as（可算）を使い分ける"},
-"at best":{tip:"「よくても・せいぜい」",similar:"at most / in the best case / if we're lucky",caution:"at best（よくても）vs at worst（悪くても・最悪の場合）を対で覚える"},
+"at best":{tip:"「よくても・せいぜい」",similar:"at most / in the best case / if we're lucky",caution:"at best / at worst はセットで出題されることが多い。The plan will take a week at best.が典型"},
 "at worst":{tip:"「悪くても・最悪の場合」",similar:"in the worst case / at most bad / if things go wrong",caution:"at best（よくても）vs at worst（悪くても）を対で覚える"},
 "far more than":{tip:"「〜をはるかに上回る・〜よりもはるかに多く」",similar:"much more than / considerably more than / greatly exceeds",caution:"far more than + 名詞・数字。far（副詞）が比較級を強調する形"},
 // ─ at 系前置詞句 ─
@@ -1180,7 +1199,7 @@ const POINT = {
 "in keeping with":{tip:"「〜と調和して・〜にふさわしく」",similar:"in harmony with / in line with / in accordance with / consistent with",caution:"in keeping with tradition/the occasion（伝統・場にふさわしく）が典型"},
 "in place":{tip:"「適切な位置に・準備ができて」",similar:"in position / ready / in effect / established",caution:"Have all the arrangements in place.（準備を整えておく）/ in place of（〜の代わりに）との違い"},
 "in some cases":{tip:"「場合によっては・ある場合には」",similar:"sometimes / in certain cases / in certain situations",caution:"In some cases, surgery may be necessary.（場合によっては手術が必要）が典型"},
-"in stock":{tip:"「在庫がある」",similar:"available / in supply / on hand",caution:"be in stock（在庫あり）vs be out of stock（在庫切れ）を対で覚える"},
+"in stock":{tip:"「在庫がある」",similar:"available / in supply / on hand",caution:"be in stock（在庫あり）vs be out of stock（在庫切れ）。This item is in stock.が典型"},
 "in the case of":{tip:"「〜の場合には・〜に関しては」",similar:"as for / regarding / in the event of / when it comes to",caution:"In the case of fire, use the stairs.（火事の場合は階段を使え）が典型"},
 "in total":{tip:"「合計で・全部で」",similar:"in all / altogether / in sum / all together",caution:"The repairs cost $500 in total.（合計500ドル）が典型。in all と書き換え可"},
 "in trouble":{tip:"「困難な状況で・問題を抱えて」",similar:"in difficulty / in a fix / in a mess / having problems",caution:"be in trouble（困っている状態）/ get into trouble（問題に巻き込まれる）の動作との区別"},
@@ -1267,7 +1286,7 @@ const POINT = {
 "as ever":{tip:"「相変わらず・いつものように」",similar:"as always / as usual / as before",caution:"She's as cheerful as ever.（相変わらず明るい）が典型。as usual と書き換え可"},
 "as follows":{tip:"「次のとおり」",similar:"as listed below / in the following way",caution:"The reasons are as follows:（理由は次のとおり）の後にコロンを置く形が典型"},
 "as of":{tip:"「〜現在・〜の時点で」",similar:"as from / starting from / effective from",caution:"As of today/January 1（今日現在/1月1日時点で）が典型。フォーマルな書き言葉"},
-"be used to":{tip:"「〜に慣れている（状態）」。used to do（以前〜した）との混同は超頻出",similar:"be accustomed to / be in the habit of",caution:"be used to -ing（慣れている）vs used to do（かつて〜した）は入試で毎年出る"},
+"be used to":{tip:"「〜に慣れている（状態）」。used to do（以前〜した）との混同は超頻出",similar:"be accustomed to / be familiar with / have grown used to",caution:"be used to -ing（慣れている）vs used to do（かつて〜した）は入試で毎年出る"},
 "for granted":{tip:"「当然のことと」。take ... for granted（〜を当然と思う）の形で使う",similar:"as a matter of course / without appreciation",caution:"take it for granted that（〜を当然と思う）/ take someone for granted（〜をありがたく思わない）"},
 "begin with":{tip:"「〜から始める」。to begin with（まず第一に）の形が入試頻出",similar:"start with / commence with / open with",caution:"begin with（〜から始める）/ to begin with（まず第一に・副詞句）の2用法を区別する"},
 "come from":{tip:"「〜から来る・〜の出身だ・〜に由来する」",similar:"originate from / derive from / be from",caution:"come from（出身・由来）/ result from（〜から生じる）を混同しない"},
@@ -1634,7 +1653,6 @@ const PHRASES = [
 {en:"to say the least",ja:"控え目に言っても",pos:"副詞句",cat:"adv",level:"advanced",exEn:"The results were, to say the least, disappointing.",exJa:"結果は控え目に言っても失望だった。"},
 {en:"all the more",ja:"いっそう・なおさら",pos:"副詞句",cat:"adv",level:"advanced",exEn:"The fact that she studied alone makes her achievement all the more remarkable.",exJa:"独学で勉強したという事実が彼女の業績をいっそう際立たせている。"},
 {en:"all the same",ja:"それでもやはり",pos:"副詞句",cat:"adv",level:"advanced",exEn:"It was not easy; all the same, she succeeded.",exJa:"簡単ではなかった。それでもやはり、彼女は成功した。"},
-{en:"none the less",ja:"それにもかかわらず",pos:"副詞句",cat:"adv",level:"advanced",exEn:"The risks were high; none the less, they proceeded.",exJa:"リスクは高かった。それにもかかわらず、彼らは進んだ。"},
 {en:"for that matter",ja:"それについて言えば",pos:"副詞句",cat:"adv",level:"standard",exEn:"He rarely reads books, or for that matter, magazines.",exJa:"彼はめったに本を読まない。雑誌についても同じことが言える。"},
 {en:"in the absence of",ja:"〜がない場合に",pos:"前置詞句",cat:"prep",level:"advanced",exEn:"In the absence of clear evidence, the case was dismissed.",exJa:"明確な証拠がない場合、訴訟は却下された。"},
 {en:"in the presence of",ja:"〜の前で・〜がいるところで",pos:"前置詞句",cat:"prep",level:"advanced",exEn:"He remained calm in the presence of danger.",exJa:"彼は危険が迫っている状況でも冷静を保った。"},
@@ -1645,7 +1663,6 @@ const PHRASES = [
 {en:"at the risk of",ja:"〜の危険を冒して",pos:"前置詞句",cat:"prep",level:"advanced",exEn:"At the risk of sounding repetitive, I must emphasize this point.",exJa:"繰り返しに聞こえる危険を冒して、この点を強調しなければならない。"},
 {en:"be on the rise",ja:"増加している",pos:"形容詞構文",cat:"adj",level:"advanced",exEn:"The number of elderly people is on the rise worldwide.",exJa:"高齢者の数が世界規模で増加している。"},
 {en:"be on the decline",ja:"減少している",pos:"形容詞構文",cat:"adj",level:"advanced",exEn:"Public trust in the media is on the decline.",exJa:"メディアへの市民の信頼が減少している。"},
-{en:"in the light of",ja:"〜を考慮して",pos:"前置詞句",cat:"prep",level:"advanced",exEn:"In the light of new evidence, the verdict was overturned.",exJa:"新しい証拠を考慮して、判決は覆された。"},
 {en:"to the best of one's knowledge",ja:"知る限りでは",pos:"副詞句",cat:"adv",level:"advanced",exEn:"To the best of my knowledge, no such document exists.",exJa:"私の知る限りでは、そのような文書は存在しない。"},
 {en:"out of one's depth",ja:"手に負えない",pos:"形容詞句",cat:"adj",level:"advanced",exEn:"Without a background in physics, I felt completely out of my depth.",exJa:"物理学の知識がなく、完全に手に負えない気がした。"},
 {en:"at one's disposal",ja:"〜の自由になる",pos:"形容詞句",cat:"adj",level:"advanced",exEn:"All resources are at your disposal.",exJa:"あらゆるリソースがあなたの自由になる。"},
@@ -1907,7 +1924,7 @@ const PHRASES = [
 {en:"as much as",ja:"〜もの（不可算）",pos:"副詞句",cat:"adv",level:"basic",exEn:"He earns as much as his boss.",exJa:"彼は上司と同じくらいの給料を稼ぐ。"},
 {en:"at best",ja:"よくても",pos:"副詞句",cat:"adv",level:"basic",exEn:"At best, we can expect a slow recovery.",exJa:"よくても、緩やかな回復が期待できるだろう。"},
 {en:"at worst",ja:"悪くても・最悪の場合",pos:"副詞句",cat:"adv",level:"basic",exEn:"At worst, we will have to start over.",exJa:"最悪の場合、やり直さなければならないだろう。"},
-{en:"far more than",ja:"〜をはるかに上回る",pos:"副詞句",cat:"adv",level:"standard",exEn:"The benefits far more than outweigh the costs.",exJa:"利点はコストをはるかに上回る。"},
+{en:"far more than",ja:"〜をはるかに上回る",pos:"副詞句",cat:"adv",level:"standard",exEn:"The benefits far outweigh the costs.",exJa:"利点はコストをはるかに上回る。"},
 // ─ at 系（basic）─
 {en:"at all costs",ja:"何としても",pos:"副詞句",cat:"adv",level:"basic",exEn:"We must protect the environment at all costs.",exJa:"何としても環境を守らなければならない。"},
 {en:"at all times",ja:"常に",pos:"副詞句",cat:"adv",level:"basic",exEn:"Safety must be maintained at all times.",exJa:"安全は常に維持されなければならない。"},
@@ -1957,7 +1974,7 @@ const PHRASES = [
 {en:"change one's mind",ja:"気が変わる",pos:"動詞句",cat:"verb",level:"basic",exEn:"She changed her mind at the last minute.",exJa:"彼女は直前に気が変わった。"},
 {en:"catch sight of",ja:"〜をちらっと見る",pos:"動詞句",cat:"verb",level:"basic",exEn:"I caught sight of her across the crowded room.",exJa:"混雑した部屋の向こうに彼女をちらっと見かけた。"},
 {en:"get hold of",ja:"〜を手に入れる・連絡を取る",pos:"動詞句",cat:"verb",level:"basic",exEn:"I've been trying to get hold of him all day.",exJa:"一日中彼に連絡を取ろうとしていた。"},
-{en:"get the better of",ja:"〜に打ち勝つ",pos:"動詞句",cat:"verb",level:"standard",exEn:"Fear should not get the better of you.",exJa:"恐怖に打ち勝ってはいけない（恐怖に負けてはいけない）。"},
+{en:"get the better of",ja:"〜に打ち勝つ",pos:"動詞句",cat:"verb",level:"standard",exEn:"Fear should not get the better of you.",exJa:"恐怖に負けてはいけない。"},
 {en:"run short of",ja:"〜が不足する",pos:"動詞句",cat:"verb",level:"basic",exEn:"We are running short of time.",exJa:"時間が不足してきている。"},
 {en:"pay a visit to",ja:"〜を訪れる",pos:"動詞句",cat:"verb",level:"basic",exEn:"We paid a visit to our old teacher.",exJa:"私たちは昔の先生を訪れた。"},
 {en:"pay respect to",ja:"〜に敬意を表する",pos:"動詞句",cat:"verb",level:"basic",exEn:"Students should pay respect to their teachers.",exJa:"生徒は先生に敬意を表すべきだ。"},
@@ -2167,7 +2184,6 @@ const PHRASES = [
 {en:"as ever",ja:"相変わらず",pos:"副詞句",cat:"adv",level:"basic",exEn:"She's as enthusiastic as ever.",exJa:"彼女は相変わらず熱心だ。"},
 {en:"as follows",ja:"次のとおり",pos:"副詞句",cat:"adv",level:"basic",exEn:"The instructions are as follows.",exJa:"説明は次のとおりです。"},
 {en:"as of",ja:"〜現在・〜の時点で",pos:"前置詞句",cat:"prep",level:"standard",exEn:"As of today, the new policy is in effect.",exJa:"今日現在、新しい方針が有効だ。"},
-{en:"for granted",ja:"当然のことと",pos:"副詞句",cat:"adv",level:"basic",exEn:"We tend to take many things for granted.",exJa:"私たちは多くのことを当然と思いがちだ。"},
 {en:"begin with",ja:"〜から始める",pos:"動詞句",cat:"verb",level:"basic",exEn:"Let's begin with a brief introduction.",exJa:"簡単な自己紹介から始めましょう。"},
 {en:"come from",ja:"〜の出身だ・〜に由来する",pos:"動詞句",cat:"verb",level:"basic",exEn:"This tradition comes from ancient times.",exJa:"この伝統は古代に由来する。"},
 {en:"compare with",ja:"〜と比較する",pos:"動詞句",cat:"verb",level:"basic",exEn:"Compared with last year, prices have risen significantly.",exJa:"昨年と比べると、価格は大幅に上昇した。"},
@@ -2200,6 +2216,8 @@ let speechVolume=parseFloat(localStorage.getItem('lex_exam_vol')||'1');
 let speechRate=parseFloat(localStorage.getItem('lex_exam_rate')||'0.82');
 let seEnabled=localStorage.getItem('lex_exam_se')!=='false';
 let sessionSize=parseInt(localStorage.getItem('lex_exam_session')||'50');
+let cooldownHours=parseFloat(localStorage.getItem('lex_exam_cd_hours')||'1');
+let cooldownCount=parseInt(localStorage.getItem('lex_exam_cd_count')||'50');
 
 // ── STATE ──
 let currentMode='flash';
@@ -2207,6 +2225,7 @@ let currentCatFilter='all';
 let currentLvFilter='all';
 let cards=[],currentIndex=0,cardState=0;
 let scoreKnow=0,scoreUnknown=0,scoreMaster=0;
+let totalAnswered=0; // セッション内の累計回答数（クールダウン判定用）
 let wordStats={};
 try{wordStats=JSON.parse(localStorage.getItem('lex_exam_wordstats')||'{}');}catch(e){}
 try{wordStats=JSON.parse(localStorage.getItem('lex_exam_wordstats')||'{}');}catch(e){}
@@ -2289,12 +2308,22 @@ function speak(text){
   window.speechSynthesis.speak(u);
 }
 
+function isCoolingDown(en){
+  const s=wordStats[en];
+  if(!s?.cooldownUntil)return false;
+  const timeOk=Date.now()>=s.cooldownUntil;
+  const countOk=totalAnswered>=s.cooldownMinAnswered;
+  return !(timeOk||countOk);
+}
+
 function sortByDifficulty(pool){
   const shuffle=arr=>{for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;};
-  const wrong  =shuffle(pool.filter(c=>wordStats[c.en]?.lastResult==='unknown'));
-  const unseen =shuffle(pool.filter(c=>!wordStats[c.en]?.lastResult));
-  const correct=shuffle(pool.filter(c=>wordStats[c.en]?.lastResult==='know'||wordStats[c.en]?.lastResult==='master'));
-  return [...wrong,...unseen,...correct];
+  const cooling=shuffle(pool.filter(c=>isCoolingDown(c.en)));
+  const active =pool.filter(c=>!isCoolingDown(c.en));
+  const wrong  =shuffle(active.filter(c=>wordStats[c.en]?.lastResult==='unknown'));
+  const unseen =shuffle(active.filter(c=>!wordStats[c.en]?.lastResult));
+  const correct=shuffle(active.filter(c=>wordStats[c.en]?.lastResult==='know'||wordStats[c.en]?.lastResult==='master'));
+  return [...wrong,...unseen,...correct,...cooling];
 }
 
 function getPool(){
@@ -2320,6 +2349,7 @@ function initDeck(){
   if(pool.length>sessionSize)pool=pool.slice(0,sessionSize);
   cards=pool;currentIndex=0;cardState=0;
   scoreKnow=scoreUnknown=scoreMaster=0;
+  totalAnswered=0;
   Object.keys(wordStats).forEach(k=>{wordStats[k].firstAttemptInSession=true;});
   clearProgress();
   document.getElementById('complete-screen').classList.remove('visible');
@@ -2413,6 +2443,9 @@ function grade(known){
     result='unknown';scoreUnknown++;
     // ① 不正解時に苦手度+1
     failData[c.en]=(failData[c.en]||0)+1;saveFailData();
+    // クールダウン設定（時間 OR 問題数 どちらか満たすまで出題停止）
+    stat.cooldownUntil=Date.now()+cooldownHours*3600000;
+    stat.cooldownMinAnswered=totalAnswered+cooldownCount;
   }
   // ⑤ lastResultを常に保存
   stat.lastResult=result;
@@ -2421,6 +2454,7 @@ function grade(known){
   try{localStorage.setItem('lex_exam_history',JSON.stringify(history.slice(0,2500)));}catch(e){}
   history=history.slice(0,2500);
   scheduleSave();
+  totalAnswered++;
   window.speechSynthesis&&window.speechSynthesis.cancel();
   currentIndex++;cardState=0;updateUI();renderCard();
   if(didInteract&&currentIndex<cards.length){const nc=cards[currentIndex];if(nc)speak(nc.en);}
@@ -2471,6 +2505,10 @@ function openSettings(){
   document.getElementById('rate-slider').value=speechRate;
   document.getElementById('rate-label').textContent=speechRate.toFixed(2)+'×';
   document.getElementById('se-toggle').checked=seEnabled;
+  document.getElementById('cd-hours-slider').value=cooldownHours;
+  document.getElementById('cd-hours-label').textContent=cooldownHours===0?'なし':cooldownHours<1?`${cooldownHours*60}分`:cooldownHours+'時間';
+  document.getElementById('cd-count-slider').value=cooldownCount;
+  document.getElementById('cd-count-label').textContent=cooldownCount===0?'なし':cooldownCount+'問';
   document.getElementById('settings-panel').classList.add('open');
 }
 function closeSettings(){document.getElementById('settings-panel').classList.remove('open');}
@@ -2492,6 +2530,14 @@ function setRate(v){
   const c=cards[currentIndex];if(c)speak(c.en);
 }
 function setSeEnabled(v){seEnabled=v;localStorage.setItem('lex_exam_se',v);}
+function setCooldownHours(v){
+  cooldownHours=parseFloat(v);localStorage.setItem('lex_exam_cd_hours',v);
+  document.getElementById('cd-hours-label').textContent=cooldownHours===0?'なし':cooldownHours<1?`${cooldownHours*60}分`:cooldownHours+'時間';
+}
+function setCooldownCount(v){
+  cooldownCount=parseInt(v);localStorage.setItem('lex_exam_cd_count',v);
+  document.getElementById('cd-count-label').textContent=cooldownCount===0?'なし':cooldownCount+'問';
+}
 function resetProgress(){
   if(!confirm('進行状態をリセットしますか？'))return;
   clearProgress();closeSettings();initDeck();
